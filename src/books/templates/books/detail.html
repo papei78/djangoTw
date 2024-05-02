@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+
+{% block title %} book  title detail {% endblock title %}
+
+
+{% block content %}
+
+
+<h1>title of a book</h1>
+
+{% if obj %}
+
+<li>
+{{obj}}
+
+<ul>
+       <li> {{obj.title}}</li>
+       <li> {{obj.slug}}</li>
+       <li> {{obj.publisher}}</li>
+       <li> {{obj.author}}</li>
+       <li> {{obj.books}}</li>
+
+</ul>
+
+</li>
+{% endif %}
+
+<a class="btn btn-danger"  href="{% url "books:main" %}"> go back</a>
+
+
+{% endblock content %}

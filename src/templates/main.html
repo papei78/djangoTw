@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block title %}MehrezFreep{% endblock title %}MehrezFree
+
+{% block content %}
+
+<p style="color:pink;">
+    les voila 
+    <ul>
+
+        {% comment %} {% for bti in bt%} {% endcomment %}
+            <li>{{bt.books.first}}</li>
+        {% comment %} {% endfor %} {% endcomment %}
+
+    </ul>
+</p>
+
+{% endblock content %}
+
