@@ -27,3 +27,7 @@ urlpatterns = [
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+
+admin.site.site_header = "Book Rental Administration"
+admin.site.index_title= "Manage the  Book Rental System"
