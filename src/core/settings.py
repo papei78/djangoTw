@@ -44,7 +44,8 @@ INSTALLED_APPS = [
     'books',
     'rentals',
     #thid party apps
-    'django_countries'
+    'django_countries',
+    'import_export',
 ]
 
 MIDDLEWARE = [

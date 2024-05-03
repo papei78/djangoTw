@@ -3,14 +3,8 @@ from books.models import Book
 from customers.models import Customer
 from datetime import timedelta
 # Create your models here.
+from .rental_choices import STATUS_CHOICES
 
-STATUS_CHOICES = (
-    ('#0','rented'), 
-    ('#1','returned'), 
-    ('#2','lost'), 
-    ('#3','delayed'), 
-
-)
 
 class Rental(models.Model):
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
@@ -31,3 +25,7 @@ class Rental(models.Model):
             self.rent_end_date =  self.rent_start_date+timedelta(days=14)
 
         super().save(*args, **kwargs)
+
+
+    class Meta:
+        ordering = ('-created',)
