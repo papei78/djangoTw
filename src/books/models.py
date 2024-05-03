@@ -3,6 +3,7 @@ from publishers.models import Publisher
 from authors.models import Author
 from django.utils.text import slugify
 import uuid
+from django.urls import reverse
 #imports for qrcode generation
 import qrcode
 from io import BytesIO
@@ -24,8 +25,9 @@ class BookTitle(models.Model):
     def books(self):
         return self.my_books.all()
     
-    # def get_books(self):
-    #     return self.books.all()
+    def get_absolute_url(self):
+        return reverse("books:detail", kwargs={"pk": self.pk})
+    
 
     def __str__(self):
         return f"Book position: {self.title}"
