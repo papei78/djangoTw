@@ -2,17 +2,21 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from .models import BookTitle
-from django.views.generic import ListView
+from django.views.generic import ListView, FormView
+from .forms import BookTitleForm
+from django.urls import reverse, reverse_lazy
 # Create your views here.
 
 
 
 
-class  BookTitleListView(ListView):
+class  BookTitleListView(FormView,ListView):
     # model = BookTitle
 
     template_name = 'books/main.html'
     context_object_name = 'qs'
+    form_class = BookTitleForm
+    success_url=reverse_lazy('books:main')
     def get_queryset(self):
         parameter = 's'
         return BookTitle.objects.filter(title__startswith=parameter)
