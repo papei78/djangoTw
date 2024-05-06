@@ -8,7 +8,8 @@ from django.views.generic import ListView
 
 class  BookTitleListView(ListView):
     model = BookTitle
-    
+    template_name = 'books/main.html'
+    context_object_name = 'qs'
 
 # def book_title_list_view(request):
 #     qs = BookTitle.objects.all() 
