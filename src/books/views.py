@@ -1,12 +1,18 @@
 from django.shortcuts import render
 from .models import BookTitle
+from django.views.generic import ListView
 # Create your views here.
 
 
-def book_title_list_view(request):
-    qs = BookTitle.objects.all() 
 
-    return render(request, 'books/main.html', {'qs':qs})
+
+class  BookTitleListView(ListView):
+    model = BookTitle
+    
+
+# def book_title_list_view(request):
+#     qs = BookTitle.objects.all() 
+#     return render(request, 'books/main.html', {'qs':qs})
 
 
 def book_title_detail_view(request, **kwargs):

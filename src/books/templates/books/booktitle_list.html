@@ -6,9 +6,9 @@
 {% block content %}
 
 
-{% if qs %}
+{% if object_list %}
 <ul>
-    {% for el in qs  %}
+    {% for el in object_list  %}
     
     
     <li><a href="{{el.get_absolute_url}}"> {{el.title}} </a></li>
