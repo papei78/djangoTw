@@ -17,9 +17,14 @@ class  BookTitleListView(FormView,ListView):
     context_object_name = 'qs'
     form_class = BookTitleForm
     success_url=reverse_lazy('books:main')
+    def get_success(self):
+        return self.request.path
     def get_queryset(self):
         parameter = 's'
         return BookTitle.objects.filter(title__startswith=parameter)
+    def form_valid(self,form):
+        form.save()
+        return super().form_valid(form)
 # def book_title_list_view(request):
 #     qs = BookTitle.objects.all() 
 #     return render(request, 'books/main.html', {'qs':qs})
