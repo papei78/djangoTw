@@ -10,6 +10,18 @@
     <div class="font-bold text-xl text-red-400">{{error}}</div>
     {% endfor %}
 {% endif %} {% endcomment %}
+
+{% if messages %}
+
+{% for message in messages %}
+{% if 'info' in messages.tags %}
+{{message}}
+{% elif 'error' in messages.tags %}
+{{message}}
+{% endif %}
+{% endfor %}
+
+{% endif %}
 <form  action="" method="POST">
     {% csrf_token %}
     {% comment %} {{form.title| add_class:'bg-slate-900 text-slate-400 p-3 rounded-2xl font-bold'}} {% endcomment %}
