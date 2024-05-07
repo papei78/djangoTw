@@ -28,7 +28,8 @@ class  BookTitleListView(FormView,ListView):
 # def book_title_list_view(request):
 #     qs = BookTitle.objects.all() 
 #     return render(request, 'books/main.html', {'qs':qs})
-    def form_invalid(self,form):    
+    def form_invalid(self,form):
+            print(form.errors)    
             self.object_list  = self.get_queryset()
             return super().form_invalid(form)
     
