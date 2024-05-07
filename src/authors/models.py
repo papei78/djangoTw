@@ -11,4 +11,4 @@ class Author(models.Model):
     """
     name = models.CharField(max_length=200)
     def __str__(self):
-            return f"author : {self.name}"
+            return f"{self.name}"
