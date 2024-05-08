@@ -26,14 +26,13 @@ class  BookTitleListView(FormView,ListView):
         parameter = 's'
         return BookTitle.objects.filter(title__startswith=parameter)
 
-    def get_context_data(self):
-         context = {
-              'hi':'hello world',
-              'form':self.get_form_class(),
-              'qs':self.get_queryset
-
-         }
-         return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['hi'] = 'hello world'
+        context['hi2'] = 'hello world2'
+         
+        return context
+    
     def form_valid(self,form):
         self.i_instance  = form.save()
         messages.add_message(self.request, messages.INFO, f"Book title: {self.i_instance.title} has been created  ")
