@@ -6,6 +6,7 @@ from django.views.generic import ListView, FormView
 from .forms import BookTitleForm
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
+import string
 
 # Create your views here.
 
@@ -28,8 +29,9 @@ class  BookTitleListView(FormView,ListView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['hi'] = 'hello world'
-        context['hi2'] = 'hello world2'
+        letters = list(string.ascii_uppercase)
+        print(letters)
+        
          
         return context
     
