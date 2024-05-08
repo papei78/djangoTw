@@ -14,10 +14,10 @@
 {% if messages %}
 
 {% for message in messages %}
-{% if 'info' in messages.tags %}
-{{message}}
-{% elif 'error' in messages.tags %}
-{{message}}
+{% if 'info' in message.tags %}
+{% include "components/alert.html" with is_info=True title="Success" body=message %}
+{% elif 'error' in message.tags %}
+{% include "components/alert.html" with is_info=False title="Error" body=message %}
 {% endif %}
 {% endfor %}
 

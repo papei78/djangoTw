@@ -20,14 +20,14 @@ class  BookTitleListView(FormView,ListView):
     form_class = BookTitleForm
     # success_url=reverse_lazy('books:main')
     i_instance = None
-    def get_success(self):
+    def get_success_url(self):
         return self.request.path
     def get_queryset(self):
         parameter = 's'
         return BookTitle.objects.filter(title__startswith=parameter)
     def form_valid(self,form):
         self.i_instance  = form.save()
-        messages.add_messages(self.request, messages.INFO, f"Book title: {self.i_instance.title} has been created  ")
+        messages.add_message(self.request, messages.INFO, f"Book title: {self.i_instance.title} has been created  ")
         return super().form_valid(form)
 # def book_title_list_view(request):
 #     qs = BookTitle.objects.all() 
@@ -35,7 +35,7 @@ class  BookTitleListView(FormView,ListView):
     def form_invalid(self,form):
             print(form.errors)    
             self.object_list  = self.get_queryset()
-            messages.add_messages(self.request, messages.ERROR , form.errors)
+            messages.add_message(self.request, messages.ERROR , form.errors)
             return super().form_invalid(form)
     
 
