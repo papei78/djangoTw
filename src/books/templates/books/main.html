@@ -24,6 +24,8 @@
 
 
 {% include "components/header.html"  with  title="Book titles" description="list of all the book titles available"%}
+{{hi}}
+
 <form  action="" method="POST">
     {% csrf_token %}
     {% comment %} {{form.title| add_class:'bg-slate-900 text-slate-400 p-3 rounded-2xl font-bold'}} {% endcomment %}
