@@ -28,7 +28,10 @@ class  BookTitleListView(FormView,ListView):
 
     def get_context_data(self):
          context = {
-              'hi':'hello world'
+              'hi':'hello world',
+              'form':self.get_form_class(),
+              'qs':self.get_queryset
+
          }
          return context
     def form_valid(self,form):
