@@ -4,7 +4,6 @@
 {% block title %} book title list{% endblock title %} 
 
 {% block content %}
-<h1>book title list</h1>
 {% comment %} {% if form.non_field_errors %}
     {% for error in form.non_field_errors  %}
     <div class="font-bold text-xl text-red-400">{{error}}</div>
@@ -20,8 +19,11 @@
 {% include "components/alert.html" with is_info=False title="Error" body=message %}
 {% endif %}
 {% endfor %}
-
 {% endif %}
+
+
+
+{% include "components/header.html"  with  title="Book titles" description="list of all the book titles available"%}
 <form  action="" method="POST">
     {% csrf_token %}
     {% comment %} {{form.title| add_class:'bg-slate-900 text-slate-400 p-3 rounded-2xl font-bold'}} {% endcomment %}
