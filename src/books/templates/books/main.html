@@ -25,6 +25,11 @@
 
 {% include "components/header.html"  with  title="Book titles" description="list of all the book titles available"%}
 
+{% for letter in letters  %}
+
+  <a href="">{{letter}}</a>
+
+{% endfor %}
 
 <form  action="" method="POST">
     {% csrf_token %}
