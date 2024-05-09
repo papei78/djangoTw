@@ -51,6 +51,6 @@ class  BookTitleListView(FormView,ListView):
     
 
 def book_title_detail_view(request, **kwargs):
-    pk= kwargs.get('pk')
-    obj = BookTitle.objects.get(pk=pk)
+    slug= kwargs.get('slug')
+    obj = BookTitle.objects.get(slug=slug)
     return  render(request, 'books/detail.html',{'obj':obj})
