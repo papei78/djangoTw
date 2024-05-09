@@ -5,7 +5,7 @@
 
 
 {% block content %}
-
+{% comment %} 
 
 <h1>title of a book</h1>
 
@@ -26,7 +26,16 @@
 </li>
 {% endif %}
 
-<a class="btn btn-danger"  href="{% url "books:main" %}"> go back</a>
+<a class="text-pink-500 border py-1 px-2 rounded-md hover:bg-pink-700 
+       hover:text-white hover:border-0 
+"  href="{% url "books:main" %}"> go back</a> {% endcomment %}
 
+{% for obj in object_list  %}
+
+
+<div> {{obj.title.title}} - {{obj.isbn}}</div>
+
+
+{% endfor %}
 
 {% endblock content %}
