@@ -54,11 +54,12 @@ class  BookTitleListView(FormView,ListView):
 
 class BookListView(ListView):
      template_name = 'books/detail.html'
+     paginate_by  = 1
      def get_queryset(self):
           title_slug = self.kwargs.get('slug')
           return Book.objects.filter(title__slug=title_slug)
      
-     
+
 # def book_title_detail_view(request, **kwargs):
 #     slug= kwargs.get('slug')
 #     obj = BookTitle.objects.get(slug=slug)
