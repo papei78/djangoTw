@@ -24,14 +24,15 @@ class  BookTitleListView(FormView,ListView):
     def get_success_url(self):
         return self.request.path
     def get_queryset(self):
-        parameter = 's'
-        return BookTitle.objects.filter(title__startswith=parameter)
+        parameter = self.kwargs.get('letter') if self.kwargs.get('letter') else 'a'
+        return BookTitle.objects.filter(title__startswith=parameter) 
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         letters = list(string.ascii_uppercase)
         context['letters'] = letters
-        
+        selected_letter = self.kwargs.get('letter') if self.kwargs.get('letter') else 'a'
+        print('selected_letter',selected_letter)
          
         return context
     

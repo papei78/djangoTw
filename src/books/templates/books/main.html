@@ -27,7 +27,7 @@
 
 {% for letter in letters  %}
 
-  <a href="">{{letter}}</a>
+  <a href="{% url "books:main"  letter|lower %}" class="{% if letter == selected_letter%}underline text-white{% endif %}">{{letter}}</a>
 
 {% endfor %}
 
@@ -65,8 +65,8 @@
     {% endfor %}
 
 </ul>
-
+{% else %}
+no book titles starting with <b class="text-red-300">{{selected_letter}}<b>
 {% endif %}
-
 
 {% endblock content %}
