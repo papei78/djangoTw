@@ -2,7 +2,7 @@ from typing import Any
 from django.db.models.query import QuerySet
 from django.shortcuts import render
 from .models import BookTitle, Book
-from django.views.generic import ListView, FormView
+from django.views.generic import DetailView, ListView, FormView
 from .forms import BookTitleForm
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
@@ -51,15 +51,17 @@ class  BookTitleListView(FormView,ListView):
     
 
 
-
-class BookListView(ListView):
-     template_name = 'books/detail.html'
-     paginate_by  = 1
-     def get_queryset(self):
-          title_slug = self.kwargs.get('slug')
-          return Book.objects.filter(title__slug=title_slug)
-     
-
+# option uno
+# class BookListView(ListView):
+#      template_name = 'books/detail.html'
+#      paginate_by  = 1
+#      def get_queryset(self):
+#           title_slug = self.kwargs.get('slug')
+#           return Book.objects.filter(title__slug=title_slug)
+# option dos
+class BookTitleDetailView(DetailView):
+        model = BookTitle
+        template_name = 'books/detail.html'
 # def book_title_detail_view(request, **kwargs):
 #     slug= kwargs.get('slug')
 #     obj = BookTitle.objects.get(slug=slug)
