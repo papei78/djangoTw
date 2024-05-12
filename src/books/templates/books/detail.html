@@ -28,9 +28,10 @@
 
 <a class="text-pink-500 border py-1 px-2 rounded-md hover:bg-pink-700 
        hover:text-white hover:border-0 
-"  href="{% url "books:main" %}"> go back</a> {% endcomment %}
+"  href="{% url "books:main" %}"> go back</a> 
 this a detailed view 
-<hr>
+<hr>{% endcomment %}
+{% include "components/header.html" with title=object.title description="book title details" is_go_back=True %}
 {% for obj in object.books  %}
 
 
