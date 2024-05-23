@@ -26,6 +26,7 @@ urlpatterns = [
     path("switch/",change_theme, name='change'),
     path('books/', include('books.urls', namespace="books")),
     path("__reload__/", include("django_browser_reload.urls")),
+    
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

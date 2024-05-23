@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+
+
+{% block content %}
+
+<div class="w-full bg-white dark:bg-slate-700 shadow p-3 rounded">
+    
+<h1 class="text-2xl  mb-4"> 
+    are you sure , you wanna delete it
+<span class="semibold">{{object.isbn}}</span>
+
+</h1>
+
+<div class="mb-4"> deleting this item is permanent and can not be undone  </div>
+<form  type="submit" method="POST">
+    {% csrf_token %}
+    <button class="bg-red-500 hover:bg-red-600 text-white rounded font-bold py-2 px-4">delete</button>
+    
+    
+    <form/>
+</div>
+
+
+{% endblock content %}
+
+
+
+

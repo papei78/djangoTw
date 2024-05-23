@@ -1,8 +1,9 @@
 from typing import Any
 from django.db.models.query import QuerySet
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from .models import BookTitle, Book
-from django.views.generic import DetailView, ListView, FormView
+from django.views.generic import ( DetailView, ListView,
+                                   FormView, DeleteView)
 from .forms import BookTitleForm
 from django.urls import reverse, reverse_lazy
 from django.contrib import messages
@@ -66,3 +67,30 @@ class BookTitleDetailView(DetailView):
 #     slug= kwargs.get('slug')
 #     obj = BookTitle.objects.get(slug=slug)
 #     return  render(request, 'books/detail.html',{'obj':obj})
+
+class BookDetailView(DetailView):
+    model = Book
+    template_name  = 'books/detail_book.html'
+
+
+    def get_object(self):
+         id=self.kwargs.get('book_id')
+        #  obj = Book.objects.get(isbn=id)
+         obj=get_object_or_404(Book, isbn=id)
+         return obj
+    
+
+class BookDeleteView(DeleteView):
+    model = Book
+    template_name = 'books/confirm_delete.html'
+
+    def get_object(self):
+        id=self.kwargs.get('book_id')
+        obj=get_object_or_404(Book, isbn=id)
+        return obj
+     
+    def get_success_url(self):
+        messages.add_message(self.request, messages.INFO, f"The book with isbn {self.get_object().isbn} has been deleted")
+        letter = self.kwargs.get('letter')
+        slug = self.kwargs.get('slug')
+        return reverse('book:detail', kwargs={'letter':letter,'slug':slug })
