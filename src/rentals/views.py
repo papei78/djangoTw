@@ -25,3 +25,12 @@ class BookRentalHistoryView(ListView):
     def get_queryset(self):
         book_id = self.kwargs.get('book_id')
         return Rental.objects.filter(book__isbn=book_id)
+    
+    def get_context_data(self, **kwargs):
+        context=super().get_context_data(**kwargs)
+        qs = self.get_queryset()
+        obj = None
+        if qs.exists():
+            obj = qs.first()
+        context['obj'] = obj
+        return context
