@@ -2,4 +2,4 @@ from django import forms
 
 
 class SearchBookForm(forms.Form):
-    search =  forms.CharField(widget = forms.TextInput(attrs={'placefolder' : 'search by book id ...'}))
+    search =  forms.CharField(widget = forms.TextInput(label='' ,attrs={'placeholder' : 'search by book id ...'}))
