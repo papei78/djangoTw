@@ -20,3 +20,8 @@ class BookRentalHistoryView(ListView):
     
     model = Rental
     template_name = "rentals/detail.html"
+
+
+    def get_queryset(self):
+        book_id = self.kwargs.get('book_id')
+        return Rental.objects.filter(book__isbn=book_id)
