@@ -1,6 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .forms import SearchBookForm
 from books.models import Book
+from django.views.generic import ListView
+from .models import Rental
 def search_book_view(request):
     form = SearchBookForm(request.POST or None)
     search_query = request.POST.get('search',None)
@@ -9,6 +11,12 @@ def search_book_view(request):
 
     if search_query is not None and book_ex:
         #redirected to detail page (rentals list of the book )
-        pass
+        return redirect('rentals:detail', search_query)
     context = {'form':form}
     return render(request, "rentals/main.js", context)
+
+
+class BookRentalHistoryView(ListView):
+    
+    model = Rental
+    template_name = "rentals/detail.html"
