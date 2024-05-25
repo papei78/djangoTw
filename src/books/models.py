@@ -54,6 +54,7 @@ class Book(models.Model):
     isbn: hashed string based on book title & publisher name
     many BOOKS can have the SAME ISBN
     """
+    id=models.CharField(primary_key=True, max_length=36,default=uuid.uuid4,editable=False )
     isbn = models.CharField(max_length=24, blank=True)
     title= models.ForeignKey(BookTitle, on_delete=models.CASCADE , related_name='my_books')
     qr_code = models.ImageField(upload_to='qr_codes', blank=True, null=True)
