@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load get_status_text %}
 
 
 {% block tilte %}
@@ -65,8 +65,8 @@ rental history
                                 {{obj.book.isbn}}
                             </td>
                             <td class="py-4 px-6">
-                                {{obj.status}}
-                                {% comment %} {{obj.status|get_status_text}} {% endcomment %}
+                                {% comment %} {{obj.status}} {% endcomment %}
+                                {{obj.status|get_status_text}}
                             </td>
                             <td class="py-4 px-6">
                                 {{obj.rent_start_date}}

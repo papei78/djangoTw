@@ -13,7 +13,7 @@ def search_book_view(request):
         #redirected to detail page (rentals list of the book )
         return redirect('rentals:detail', search_query)
     context = {'form':form}
-    return render(request, "rentals/main.js", context)
+    return render(request, "rentals/main.html", context)
 
 
 class BookRentalHistoryView(ListView):
