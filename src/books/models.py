@@ -10,6 +10,7 @@ from io import BytesIO
 from django.core.files import File
 from PIL import Image
 from rentals.rental_choices import STATUS_CHOICES
+from .utlis import hash_book_info
 # Create your models here.
 
 
@@ -80,8 +81,7 @@ class Book(models.Model):
             statuses = dict(STATUS_CHOICES)
             return statuses [self.rental_set.first().status]
         return False
-    
-    
+
     @property
     def is_available(self):
         if len(self.rental_set.all()) >0:
@@ -91,7 +91,8 @@ class Book(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.isbn:
-            self.isbn = str(uuid.uuid4()).replace('-','')[:24].lower()
+            # self.isbn = str(uuid.uuid4()).replace('-','')[:24].lower()
+            self.isbn = hash_book_info(self.title.title, self.title.publisher.name)
         qrcode_img = qrcode.make(self.isbn)
         canvas = Image.new('RGB', (qrcode_img.pixel_size, qrcode_img.pixel_size), 'white')
         canvas.paste(qrcode_img)
