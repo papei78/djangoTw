@@ -42,6 +42,18 @@ class BookTitle(models.Model):
 
 
 class Book(models.Model):
+
+
+    """
+    current status for books 
+    id:1,2,3 ...
+    isbn: unique 24 character long string
+
+    future state
+    id: 36 character long string
+    isbn: hashed string based on book title & publisher name
+    many BOOKS can have the SAME ISBN
+    """
     isbn = models.CharField(max_length=24, blank=True)
     title= models.ForeignKey(BookTitle, on_delete=models.CASCADE , related_name='my_books')
     qr_code = models.ImageField(upload_to='qr_codes', blank=True, null=True)
