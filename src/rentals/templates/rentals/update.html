@@ -16,6 +16,11 @@ update status
 {% include 'components/header.html' with title="Update rental status" description=object.book.id is_go_back=True %}
 
 
+{% if object.is_closed %}
+
+The rental status is closed 
+
+{% else %}
 <form method="POST" class="w-1/2"> 
     {% csrf_token %}
     <div class="mb-2">
@@ -27,6 +32,9 @@ update status
         update
     </button> 
 </form>
+{% endif %}
+
+
 
 {% endblock content %}
 
