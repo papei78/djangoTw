@@ -1,18 +1,24 @@
 {% extends "base.html" %}
-
+{% load widget_tweaks %}
 
 {% block title %}
 update status
 {% block content %}
+{% include 'components/header.html' with title="Update rental status" description=object.book.id is_go_back=True %}
 
 
-{{object.book.title.title}} -{{object.id}}
+<form method="POST" class="w-1/2"> 
+    {% csrf_token %}
+    <div class="mb-2">
+        <label for="{{ form.status.id_for_label}}" class="block fort-bold text-slate-800 dark:text-slate-300">status:</label>
+            {{ form.status|add_class:'bg-slate-100 dark:bg-slate-300 text-slate-800 rounded p-2 w-full'}}
+        </label>
+    </div>
+    <button type="submit" class="px-3 py-2 text-white bg-sky-500 hover:bg-sky-600 rounded-xl mt-3">
+        update
+    </button> 
+</form>
 
-<div>
-
-{{form.as_p}}
-
-</div>
 {% endblock content %}
 
 {% endblock title %}
