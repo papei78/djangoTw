@@ -4,6 +4,9 @@ from books.models import Book
 from django.views.generic import ListView , UpdateView
 from .models import Rental
 from django.db.models import Q
+from django.urls import reverse
+from datetime import datetime
+from django.contrib import messages
 def search_book_view(request):
     form = SearchBookForm(request.POST or None)
     search_query = request.POST.get('search',None)
@@ -39,3 +42,16 @@ class UpdateRentalStatusView(UpdateView):
     model = Rental
     template_name  ='rentals/update.html'
     fields = ("status",)
+
+    def get_success_url(self):
+        book_id = self.kwargs.get('book_id')
+        return reverse('rentals:detail', kwargs={'book_id':book_id})
+
+    def form_valid(self,form):
+        instance = form.save(commit=False)
+        if instance.status =='#1':
+            instance.return_date = datetime.today().date()
+            instance.is_closed = True
+        instance.save()
+        messages.add_message(self.request, messages.INFO, f"{instance.book.id} was successfully updated" )
+        return super().form_valid(form)
