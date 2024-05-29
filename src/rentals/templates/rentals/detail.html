@@ -12,7 +12,7 @@ rental history
 
 
 
-{% include "components/header.html" with title=object.book.title description=object.book.title.publisher.name %}
+{% include "components/header.html" with title=object.title.title description=object.title.publisher.name %}
 {% if object %}
             {% if object_list %}
             <div class="overflow-x-auto"> 
@@ -92,9 +92,11 @@ rental history
                 {% comment %} <div class="mt-6 h-12">
                     <a href="{% url 'rentals:download' book_id %}" class="p-3 bg-rose-400 hover:bg-rose-500 text-white rounded-lg">download</a>
                 </div> {% endcomment %}
+                {% else %}
+                no rental data
             {% endif %}
 {% else %}
-no data
+no book found
 {% endif %}
 {% endblock content %}
 
