@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect , get_object_or_404
 from .forms import SearchBookForm
 from books.models import Book
-from django.views.generic import ListView
+from django.views.generic import ListView , UpdateView
 from .models import Rental
 from django.db.models import Q
 def search_book_view(request):
@@ -34,3 +34,8 @@ class BookRentalHistoryView(ListView):
         # obj = get_object_or_404(Book, Q(isbn=book_id)| Q(id=book_id))
         context['object'] = obj
         return context
+
+class UpdateRentalStatusView(UpdateView):
+    model = Rental
+    template_name  ='rentals/update.html'
+    fields = ("status",)

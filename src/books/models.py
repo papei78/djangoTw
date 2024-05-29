@@ -79,8 +79,14 @@ class Book(models.Model):
     def status(self):
         if len(self.rental_set.all())>0:
             statuses = dict(STATUS_CHOICES)
-            return statuses [self.rental_set.first().status]
+            return statuses[self.rental_set.first().status]
         return False
+    
+    @property
+    def rental_id(self):
+        if len(self.rental_set.all())>0:
+            return self.rental_set.first().id
+        return None
 
     @property
     def is_available(self):
