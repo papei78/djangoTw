@@ -6,12 +6,18 @@
 {% endblock scripts %}
 
 {% block title %}book detail{% endblock title %}
+
+
+{% block content %}
+
+
+
 {% include 'components/header.html' with title=object.title.title description=object.title.publisher.name is_go_back=True %}
 
 <div class="flex justify-center">
     <div>
         <div class="text-center mb-3">
-            {% if object.is_available %} availablE
+            {% if object.is_available %} 
                 {% comment %} <a href="{% url 'rentals:new' object.id %}" class="p-3 bg-sky-500 hover:bg-sky-600 rounded-lg text-white">rent</a> {% endcomment %}
                 {% if object.status %}
                     {{object.status}}
