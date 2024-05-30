@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect , get_object_or_404
 from .forms import SearchBookForm
 from books.models import Book
-from django.views.generic import ListView , UpdateView
+from django.views.generic import ListView , UpdateView , CreateView
 from .models import Rental
 from django.db.models import Q
 from django.urls import reverse
@@ -54,4 +54,29 @@ class UpdateRentalStatusView(UpdateView):
             instance.is_closed = True
         instance.save()
         messages.add_message(self.request, messages.INFO, f"{instance.book.id} was successfully updated" )
+        return super().form_valid(form)
+
+
+class CreateNewRentalView(CreateView):
+    model = Rental
+    template_name = 'rentals/new.html'
+    fields  = ('customer',)
+
+    def get_success_url(self):
+        book_id = self.kwargs.get('book_id')
+        return reverse('rentals:detail', kwargs={'book_id':book_id})
+
+
+    def get_context_data(self,**kwargs):
+       context  =super().get_context_data(**kwargs)
+       context["book_id"] = self.kwargs.get('book_id')
+       return context
+    def form_valid(self, form):
+        instance = form.save(commit=False)
+        book_id = self.kwargs.get('book_id')
+        obj = Book.objects.get('book_id')
+        instance.book = obj
+        instance.status = '#0'
+        instance.rent_start_date  = datetime.today().date()
+        instance.save()
         return super().form_valid(form)

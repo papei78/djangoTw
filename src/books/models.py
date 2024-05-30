@@ -64,11 +64,11 @@ class Book(models.Model):
 
     def get_absolute_url(self):
         letter = self.title.title[:1].lower()
-        return reverse("books:detail-book", kwargs={"letter":letter,"slug": self.title.slug, "book_id":self.isbn})
+        return reverse("books:detail-book", kwargs={"letter":letter,"slug": self.title.slug, "book_id":self.id})
 
     def delete_object(self):
         letter = self.title.title[:1].lower()
-        return reverse("books:delete-book", kwargs={'letter':letter,'slug':self.title.slug, "book_id":self.isbn})
+        return reverse("books:delete-book", kwargs={'letter':letter,'slug':self.title.slug, "book_id":self.id})
     
     
 
