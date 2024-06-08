@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect , get_object_or_404
-from .forms import SearchBookForm
+from .forms import SearchBookForm,SelectedExportOptionForm
 from books.models import Book
-from django.views.generic import ListView , UpdateView , CreateView
+from django.views.generic import ListView , UpdateView , CreateView, FormView
 from .models import Rental
 from django.db.models import Q
 from django.urls import reverse
@@ -36,6 +36,7 @@ class BookRentalHistoryView(ListView):
         obj = Book.objects.filter(Q(isbn=book_id)| Q(id=book_id)).first()
         # obj = get_object_or_404(Book, Q(isbn=book_id)| Q(id=book_id))
         context['object'] = obj
+        context['book_id'] = book_id
         return context
 
 class UpdateRentalStatusView(UpdateView):
@@ -80,3 +81,14 @@ class CreateNewRentalView(CreateView):
         instance.rent_start_date  = datetime.today().date()
         instance.save()
         return super().form_valid(form)
+
+class SelectDownloadRentalsView(FormView):
+        template_name = 'rentals/select_format.html'
+        form_class = SelectedExportOptionForm
+
+        def get_success_url(self):
+            return self.request.path
+        
+
+        def post(self,request,**kwargs):
+            return 
