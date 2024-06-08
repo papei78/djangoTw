@@ -14,6 +14,31 @@ def change_theme(request):
         request.session['is_dark_mode'] = False
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+"""
+create dashboard view - template view
+create seperate data view with JsonResponse
+create js file -> attach it to the template -> load the data to js
+use the data to draw charts
+
+charts:
+1) book titles vs books (bar)
+2) book title count by publisher (pie)
+3) books by status (pie)
+4) publishers vs customers (bar)
+
+"""
+
+
+
+
+
+
+
+
+
+
+
+
 
 def home_view(request):
 
