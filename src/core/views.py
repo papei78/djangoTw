@@ -2,6 +2,9 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from customers.models import Customer
 from books.models import BookTitle
+from django.http import JsonResponse
+
+from django.views.generic import TemplateView
 
 
 def change_theme(request):
@@ -28,6 +31,11 @@ charts:
 
 """
 
+class DashboardView(TemplateView):
+    template_name  = 'dashboard.html'
+
+def chart_data(request):
+    return JsonResponse({'msg':'hello world chart data view'})
 
 
 
@@ -40,11 +48,11 @@ charts:
 
 
 
-def home_view(request):
+# def home_view(request):
 
-    value=Customer.objects.all()
-    bt=BookTitle.objects.get(id=1)
-    context = {'value': value,
-               'bt':bt,
-               }
-    return render(request, 'main.html', context)
+#     value=Customer.objects.all()
+#     bt=BookTitle.objects.get(id=1)
+#     context = {'value': value,
+#                'bt':bt,
+#                }
+#     return render(request, 'main.html', context)
