@@ -3,8 +3,8 @@ from django.shortcuts import render
 from customers.models import Customer
 from books.models import BookTitle
 from django.http import JsonResponse
-
 from django.views.generic import TemplateView
+from django.db.models import Count, Sum
 
 
 def change_theme(request):
@@ -35,6 +35,8 @@ class DashboardView(TemplateView):
     template_name  = 'dashboard.html'
 
 def chart_data(request):
+    qs = BookTitle.objects.annotate(Count('title'))
+    print(qs)
     return JsonResponse({'msg':'hello world chart data view'})
 
 
