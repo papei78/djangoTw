@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static 
-from .views import DashboardView , change_theme , chart_data
+from .views import DashboardView , change_theme  ,chart_data
 
 urlpatterns = [
     path('admin/', admin.site.urls),
