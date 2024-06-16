@@ -5,6 +5,9 @@ from books.models import Book,BookTitle
 from django.http import JsonResponse
 from django.views.generic import TemplateView
 from django.db.models import Count, Sum
+from rentals.models import Rental
+from publishers.models import Publisher
+from rentals.rental_choices import STATUS_CHOICES
 
 
 def change_theme(request):
@@ -56,9 +59,29 @@ def chart_data(request):
         'description':'book title count by publisher',
         'type':'pie',
     })
-    print(data)
     # 3) books by status (pie)
+    book_by_status = Rental.objects.values('status').annotate(Count('book__title'))
+    book_title_count = [x['book__title__count'] for x in book_by_status]
+    status_keys = [x['status'] for x in book_by_status]
+    status  =  [dict(STATUS_CHOICES)[key] for key in status_keys]
+    data.append({
+        'labels':status,
+        'data':book_title_count,
+        'description':'book by status',
+        'type':'pie',
+    })
     # 4) publishers vs customers (bar)
+    customers = len(Customer.objects.all())
+    publishers = len(Publisher.objects.all())
+    data.append(
+        {
+        'labels':['customers','publishers'],
+        'data':[customers, publishers],
+        'description':'customers vs publishers',
+        'type':'bar',
+        }
+    )
+    print(data)
     return JsonResponse({'msg':'hello world chart data view'})
 
 
