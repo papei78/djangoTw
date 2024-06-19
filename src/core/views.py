@@ -8,6 +8,26 @@ from django.db.models import Count, Sum
 from rentals.models import Rental
 from publishers.models import Publisher
 from rentals.rental_choices import STATUS_CHOICES
+from .forms import LoginForm, OTPForm
+from django.contrib.auth import login, authenticate, logout
+from  django.contrib import messages
+
+def login_view(request):
+    form = LoginForm(request.POST or None)
+    if request.method =='POST':
+        if form.is_valid():
+            username  =form.cleaned_data.get('username')
+            password  =form.cleaned_data.get('password')
+            user = authenticate(request, username=username, password=password)
+            if user is not None:
+                print('ok, sending otp')
+            else:
+                messages.add_message(request,messages.ERROR, 'Invalid username or password')
+    context = {
+        'form': form,
+    }
+    return render(request,'login.html', context )
+
 
 
 def change_theme(request):
