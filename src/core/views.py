@@ -38,7 +38,7 @@ class DashboardView(TemplateView):
     template_name  = 'dashboard.html'
 
 def chart_data(request):
-    data =[]
+    data=[]
     # 1) book titles vs books (bar)
     all_books = len(Book.objects.all())
     all_book_titles = len(BookTitle.objects.all())
@@ -82,7 +82,7 @@ def chart_data(request):
         }
     )
     print(data)
-    return JsonResponse({'msg':'hello world chart data view'})
+    return JsonResponse({'data':data})
 
 
 
