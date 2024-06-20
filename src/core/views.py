@@ -17,6 +17,10 @@ import pyotp
 from django.contrib.auth.models import User
 
 
+def logout_view(request):
+    logout(request)
+    return redirect('login')
+
 def login_view(request):
     form = LoginForm(request.POST or None)
     if request.method =='POST':
