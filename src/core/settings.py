@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'widget_tweaks',
     ]
 TAILWIND_APP_NAME = 'theme'
+LOGIN_URL   = '/login'
 INTERNAL_IPS = [
     "127.0.0.1",
     ]

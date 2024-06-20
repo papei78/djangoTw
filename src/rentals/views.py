@@ -10,6 +10,10 @@ from django.contrib import messages
 from .rental_choices import FORMAT_CHOICES
 from .admin import RentalResource
 from django.http import HttpResponse
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
+
+@login_required
 def search_book_view(request):
     form = SearchBookForm(request.POST or None)
     search_query = request.POST.get('search',None)
@@ -23,7 +27,7 @@ def search_book_view(request):
     return render(request, "rentals/main.html", context)
 
 
-class BookRentalHistoryView(ListView):
+class BookRentalHistoryView(LoginRequiredMixin,ListView):
     
     model = Rental
     template_name = "rentals/detail.html"
@@ -42,7 +46,7 @@ class BookRentalHistoryView(ListView):
         context['book_id'] = book_id
         return context
 
-class UpdateRentalStatusView(UpdateView):
+class UpdateRentalStatusView(LoginRequiredMixin,UpdateView):
     model = Rental
     template_name  ='rentals/update.html'
     fields = ("status",)
@@ -61,7 +65,7 @@ class UpdateRentalStatusView(UpdateView):
         return super().form_valid(form)
 
 
-class CreateNewRentalView(CreateView):
+class CreateNewRentalView(LoginRequiredMixin,CreateView):
     model = Rental
     template_name = 'rentals/new.html'
     fields  = ('customer',)
@@ -85,7 +89,7 @@ class CreateNewRentalView(CreateView):
         instance.save()
         return super().form_valid(form)
 
-class SelectDownloadRentalsView(FormView):
+class SelectDownloadRentalsView(LoginRequiredMixin,FormView):
         template_name = 'rentals/select_format.html'
         form_class = SelectedExportOptionForm
 

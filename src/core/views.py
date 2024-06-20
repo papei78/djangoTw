@@ -15,6 +15,8 @@ from .utils import send_otp
 from datetime import datetime
 import pyotp
 from django.contrib.auth.models import User
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.decorators import login_required
 
 
 def logout_view(request):
@@ -75,7 +77,7 @@ def otp_view(request):
     return render(request, 'otp.html', context)
 
 
-
+@login_required
 def change_theme(request):
 
     print(request.session['is_dark_mode'])
@@ -100,9 +102,9 @@ charts:
 
 """
 
-class DashboardView(TemplateView):
+class DashboardView(LoginRequiredMixin,TemplateView):
     template_name  = 'dashboard.html'
-
+@login_required
 def chart_data(request):
     data=[]
     # 1) book titles vs books (bar)
