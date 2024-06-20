@@ -11,6 +11,8 @@ from rentals.rental_choices import STATUS_CHOICES
 from .forms import LoginForm, OTPForm
 from django.contrib.auth import login, authenticate, logout
 from  django.contrib import messages
+from .utils import send_otp
+
 
 def login_view(request):
     form = LoginForm(request.POST or None)
@@ -20,6 +22,7 @@ def login_view(request):
             password  =form.cleaned_data.get('password')
             user = authenticate(request, username=username, password=password)
             if user is not None:
+                send_otp(request)
                 print('ok, sending otp')
             else:
                 messages.add_message(request,messages.ERROR, 'Invalid username or password')
@@ -27,6 +30,7 @@ def login_view(request):
         'form': form,
     }
     return render(request,'login.html', context )
+
 
 
 
