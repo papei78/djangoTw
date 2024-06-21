@@ -11,7 +11,7 @@ from rentals.rental_choices import STATUS_CHOICES
 from .forms import LoginForm, OTPForm
 from django.contrib.auth import login, authenticate, logout
 from  django.contrib import messages
-from .utils import send_otp
+from .utils import send_otp, is_ajax
 from datetime import datetime
 import pyotp
 from django.contrib.auth.models import User
@@ -106,6 +106,10 @@ class DashboardView(LoginRequiredMixin,TemplateView):
     template_name  = 'dashboard.html'
 @login_required
 def chart_data(request):
+    
+    if not is_ajax(request):
+        return redirect('home')
+
     data=[]
     # 1) book titles vs books (bar)
     all_books = len(Book.objects.all())
