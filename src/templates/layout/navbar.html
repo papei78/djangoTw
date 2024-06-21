@@ -4,6 +4,8 @@
         <div>
             logo
         </div>
+        {% if request.user.is_autenticated %}
+
         <div class="flex items-center">
             <div class="relative" id="dropdown-box">
                 <button id="btn-dropdown" class="bg-white bg-opacity-10 rounded drop-shadow-lg p-3 hover:opacity-80 focus:ring-4 focus:ring-blue-300" type="button">menu &nbsp; <i class="fa-solid fa-caret-down"></i></button>
@@ -20,11 +22,12 @@
 
                 </div>
             </div>
-
+            
             <div class="bg-white rounded-full ml-3">
                 <svg width="55" height="55" data-jdenticon-value="{{request.user.username}}"></svg>
             </div>
         </div>
+        {% endif %}
     </div>
 
 </nav>
