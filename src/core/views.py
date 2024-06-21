@@ -85,7 +85,7 @@ def change_theme(request):
     if 'is_dark_mode' in request.session:
         request.session['is_dark_mode'] = not request.session['is_dark_mode']
     else:
-        request.session['is_dark_mode'] = False
+        request.session['is_dark_mode'] = True
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 """
@@ -106,7 +106,7 @@ class DashboardView(LoginRequiredMixin,TemplateView):
     template_name  = 'dashboard.html'
 @login_required
 def chart_data(request):
-    
+
     if not is_ajax(request):
         return redirect('home')
 
