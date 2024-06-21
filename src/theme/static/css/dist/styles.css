@@ -920,6 +920,10 @@ select {
   max-height: 540px;
 }
 
+.max-h-\[640px\] {
+  max-height: 640px;
+}
+
 .min-h-full {
   min-height: 100%;
 }
