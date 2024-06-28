@@ -27,17 +27,15 @@
 	<body class="bg-gray-50 dark:bg-slate-800  dark:text-white">
 		{% include "layout/navbar.html" %}
 		<div class="grid grid-cols-12">
-			{% if request.user.is_autenticated %}
+			{% if request.user.is_authenticated %}
 			
 			<div class="col-span-1">
 				{% include "layout/sidebar.html" %}</div>
-
-			
 			{% endif %}
-		<div class="{% if request.user.is_autenticated %}
+		<div class="{% if request.user.is_authenticated %}
 col-span-11 {%else%} col-span-12  {%endif%} ">
 			<div class="pt-20 px-6"  >
-				{% if request.user.is_autenticated %}
+				{% if request.user.is_authenticated %}
 				<a href="{% url 'change' %}"
 					class="fixed top-[150px] right-0 p-3 rounded-l-lg
 					bg-slate-200 hover:bg-slate-300 dark:bg-yellow-400

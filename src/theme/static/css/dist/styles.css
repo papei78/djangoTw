@@ -916,10 +916,6 @@ select {
   height: 100vh;
 }
 
-.max-h-\[540px\] {
-  max-height: 540px;
-}
-
 .max-h-\[640px\] {
   max-height: 640px;
 }
