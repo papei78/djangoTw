@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'customers',
     'books',
     'rentals',
+    'users',
     #thid party apps
     'django_countries',
     'import_export',
@@ -53,6 +54,8 @@ INSTALLED_APPS = [
     ]
 TAILWIND_APP_NAME = 'theme'
 LOGIN_URL   = '/login'
+
+AUTH_USER_MODEL = 'users.CustomUser'
 INTERNAL_IPS = [
     "127.0.0.1",
     ]
